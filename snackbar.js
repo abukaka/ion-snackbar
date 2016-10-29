@@ -16,6 +16,7 @@ angular.module("snackbar", ['ngAnimate']).service('$snackbar', function($http, $
     $log.log("Error getting html template", JSON.stringify(err))
   });
   this.show = function(options) {
+    var self = this;
     return $q(function(resolve, reject) {
       clearTimeout(timeout);
       var wrapper = document.getElementsByClassName("snackbar-wrapper");
@@ -26,7 +27,7 @@ angular.module("snackbar", ['ngAnimate']).service('$snackbar', function($http, $
           return;
         }
         var buttonName = options.buttonName ? options.buttonName.trim() : false;
-        var buttonFunction = options.buttonFunction ? options.buttonFunction : this.hide;
+        var buttonFunction = options.buttonFunction ? options.buttonFunction : self.hide;
         var buttonColor = options.buttonColor ? options.buttonColor : '#a1c2fa';
         var messageColor = options.messageColor ? options.messageColor : 'white';
         var time = options.time ? options.time : 'SHORT';
